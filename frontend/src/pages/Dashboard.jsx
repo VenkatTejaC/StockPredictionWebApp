@@ -36,7 +36,7 @@ export default function Dashboard() {
   const [quarterlyData, setQuarterlyData] = useState({});
 
   const fetchStockData = () => {
-    let url = `http://127.0.0.1:8000/stock/${ticker}`;
+    let url = `https://stockbackend-182u.onrender.com/stock/${ticker}`;
     if (fromDate && toDate) {
       url += `?start=${fromDate}&end=${toDate}`;
     }
@@ -49,14 +49,14 @@ export default function Dashboard() {
 
   useEffect(() => {
   axios
-    .get(`http://127.0.0.1:8000/about/${ticker}`)
+    .get(`https://stockbackend-182u.onrender.com/stock/${ticker}`)
     .then((res) => setAboutText(res.data.description))
     .catch(() => setAboutText("No description available."));
 }, [ticker]);
 
   const fetchPredictions = () => {
     axios
-      .get(`http://127.0.0.1:8000/predict/${ticker}?days_ahead=${daysAhead}`)
+      .get(`https://stockbackend-182u.onrender.com/stock/${ticker}?days_ahead=${daysAhead}`)
       .then((res) => setPredictions(res.data.predictions))
       .catch((err) => console.error("Error fetching predictions:", err));
   };
@@ -68,7 +68,7 @@ export default function Dashboard() {
     }
     axios
       .get(
-        `http://127.0.0.1:8000/quarterly/${ticker}?year=${year}&quarters=${selectedQuarters.join(",")}`
+        `https://stockbackend-182u.onrender.com/stock/${ticker}?year=${year}&quarters=${selectedQuarters.join(",")}`
       )
       .then((res) => setQuarterlyData(res.data.quarters))
       .catch((err) => console.error("Error fetching quarterly data:", err));
